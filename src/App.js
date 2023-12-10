@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const MOCK_USER_ID = '111';
+
 const App = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [fileFields, setFileFields] = useState([]);
@@ -20,25 +22,22 @@ const App = () => {
   };
 
   const handleUploadAll = () => {
+    const userData = [];
     const formData = new FormData();
     fileFields.forEach((field, ind) => {
-      formData.append('types', JSON.stringify({ test: field.title }));
       if (field.files) {
         for (let i = 0; i < field.files.length; i++) {
-          formData.append(`file-${ind}`, field.files[i]);
+          userData.push({ scraperType: field.title, userId: MOCK_USER_ID, fileNameId: `${ind}` });
+          formData.append(`${ind}`, field.files[i]);
         }
       }
     });
-
-    axios.post(
-      'http://localhost:4000/customer/scrape',
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+    formData.append('userData', JSON.stringify(userData));
+    axios.post('http://localhost:4000/customer/scrape', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
       },
-    );
+    });
   };
 
   const handleRemoveField = (index) => {
