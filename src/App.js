@@ -27,7 +27,7 @@ const App = () => {
     fileFields.forEach((field, ind) => {
       if (field.files) {
         for (let i = 0; i < field.files.length; i++) {
-          userData.push({ scraperType: field.title, userId: MOCK_USER_ID, fileNameId: `${ind}` });
+          userData.push({ scraperType: field.title, userId: MOCK_USER_ID, fileInd: `${ind}` });
           formData.append(`${ind}`, field.files[i]);
         }
       }
