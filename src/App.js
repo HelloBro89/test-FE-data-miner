@@ -82,16 +82,25 @@ const App = () => {
           style={{
             textAlign: 'center',
             margin: '10px',
+            marginTop: '40px',
           }}
         >
           <div>{field.title}</div>
-          <input type="file" onChange={(event) => handleFileChange(event, index)} />
+          <input
+            style={{
+              marginTop: '10px',
+            }}
+            type="file"
+            onChange={(event) => handleFileChange(event, index)}
+          />
           <button onClick={() => handleRemoveField(index)}>Remove</button>
         </div>
       ))}
       <button
         style={{
           marginTop: '30px',
+          width: '200px',
+          height: '30px',
         }}
         onClick={handleAddField}
       >
@@ -100,6 +109,8 @@ const App = () => {
       <button
         style={{
           marginTop: '30px',
+          width: '200px',
+          height: '30px',
         }}
         onClick={handleUploadAll}
       >
